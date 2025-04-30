@@ -37,9 +37,9 @@ public class APIController {
     @Autowired
     private OfferService offerService;
 
-    @GetMapping("/offers")
-    public ResponseEntity<Offer> getOfferById(@PathVariable ObjectId _id) {
-        Offer offer = offerService.getOfferById(_id);
+    @GetMapping("/offers/{id}")
+    public ResponseEntity<Offer> getOfferById(@PathVariable String id) {
+        Offer offer = offerService.getOfferById(id);
         return offer != null ? ResponseEntity.ok(offer) : ResponseEntity.notFound().build();
     }
 

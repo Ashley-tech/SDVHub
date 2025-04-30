@@ -1,12 +1,14 @@
 package com.example.project_optimisation.document;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.Getter;
@@ -14,16 +16,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "offers")
 public class Offer {
-    @Id
-    private ObjectId _id;
+    //private ObjectId _id;
 
+    @Id
     private String id;
     private String from;
     private String to;
-    private Instant departDate;
-    private Instant returnDate;
+    private Date departDate;
+    private Date returnDate;
     private String provider;
     private BigDecimal price;
     private String currency;
@@ -31,33 +34,24 @@ public class Offer {
     private Hotel hotel;
     private Activity activity;
 
-    public Offer(String id){
-        this.id = id;
-    }
-
-    // Tu peux ajouter un getter et un setter pour ObjectId
-    public String getIdAsString() {
-        return _id != null ? _id.toHexString() : null;
-    }
-
-    public void setIdFromString(String _id) {
-        this._id = new ObjectId(_id);
+    public Offer(){
+        
     }
 
     public String getID(){
         return id;
     }
-    public String getFr(){
+    public String getFrom(){
         return from;
     }
 
     public String getTo(){return to;}
 
-    public Instant getDateDepart(){
+    public Date getDateDepart(){
         return departDate;
     }
 
-    public Instant getDateRetour(){
+    public Date getDateRetour(){
         return returnDate;
     }
 
