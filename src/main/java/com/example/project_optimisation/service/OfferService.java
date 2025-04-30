@@ -42,6 +42,13 @@ public class OfferService {
 
     private static final Gson gson = new Gson();
 
+    public List<Offer> getLimitedOffers(String from, String to, int limit) {
+        Query query = new Query().limit(limit);
+        query.addCriteria(Criteria.where("from").is(from).where("to").is(to));
+        return mongoTemplate.find(query, Offer.class);
+    }
+    
+
     public List<OfferSummary> searchOffers(String from, String to, int limit) {
         String redisKey = String.format("offers:%s:%s", from, to);
         String cached = redisTemplate.opsForValue().get(redisKey);

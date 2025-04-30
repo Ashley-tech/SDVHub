@@ -3,10 +3,9 @@ package com.example.project_optimisation.controller;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import java.util.Map;
+import java.util.UUID;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import com.example.project_optimisation.document.Offer;
 import com.example.project_optimisation.dto.OfferSummary;
 import com.example.project_optimisation.model.Erreur;
 import com.example.project_optimisation.service.OfferService;
-import com.example.project_optimisation.service.RecoService;
 
 @RestController
 public class APIController {
@@ -48,10 +46,17 @@ public class APIController {
     public List<OfferSummary> searchOffers(
         @RequestParam String from,
         @RequestParam String to,
-        @RequestParam(required = false, defaultValue = "10") int limit
+        @RequestParam(required = false) int limit
     ) {
+        System.out.println("Limites : "+limit);
         return offerService.searchOffers(from, to, limit);
     }
+        
+    /*public List<OfferSummary> getSampleOffers(@RequestParam String from,
+    @RequestParam String to,
+    @RequestParam(required = false, defaultValue="10") int limit) {
+        return offerService.getLimitedOffers(from,to,limit);
+    }*/
 
     @Autowired
     private StringRedisTemplate redisTemplate;
