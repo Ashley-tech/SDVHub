@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG
+    org.springframework.data.neo4j: DEBUG
+    org.springframework.data.redis: DEBUG
