@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project_optimisation.document.Offer;
+import com.example.project_optimisation.dto.OfferSummary;
 import com.example.project_optimisation.model.Erreur;
 import com.example.project_optimisation.service.OfferService;
 import com.example.project_optimisation.service.RecoService;
@@ -41,6 +42,15 @@ public class APIController {
     public ResponseEntity<Offer> getOfferById(@PathVariable String id) {
         Offer offer = offerService.getOfferById(id);
         return offer != null ? ResponseEntity.ok(offer) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/offers")
+    public List<OfferSummary> searchOffers(
+        @RequestParam String from,
+        @RequestParam String to,
+        @RequestParam(required = false, defaultValue = "10") int limit
+    ) {
+        return offerService.searchOffers(from, to, limit);
     }
 
     @Autowired
